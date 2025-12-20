@@ -1,57 +1,39 @@
 plugins {
-	id 'java'
-	id 'org.springframework.boot' version '3.5.8'
-	id 'io.spring.dependency-management' version '1.1.7'
+    id 'java'
 }
 
-group = 'aicard'
-version = '0.0.1-SNAPSHOT'
-description = 'AI 스마트 카드 실적 매니저'
+allprojects {
+    group = "aicard"
+    version = "0.0.1-SNAPSHOT"
+    description = 'AI 스마트 카드 실적 매니저'
 
-java {
-	toolchain {
-		languageVersion = JavaLanguageVersion.of(21)
-	}
+    repositories {
+        mavenCentral()
+    }
 }
 
-repositories {
-	mavenCentral()
-}
+subprojects {
+    apply plugin: 'java'
 
-dependencies {
+    java {
+        toolchain {
+            languageVersion = JavaLanguageVersion.of(21)
+        }
+    }
 
-    // ===== 최적화/수치 =====
-    implementation 'org.optaplanner:optaplanner-spring-boot-starter'          // 제약 기반 최적화(실적 분배 플랜)
-    implementation 'org.apache.commons:commons-math3'                          // 통계/수치 연산(분포·회귀·필터 등)
+    dependencies {
+        // Lombok
+        compileOnly 'org.projectlombok:lombok:1.18.32'
+        annotationProcessor 'org.projectlombok:lombok:1.18.32'
+        testCompileOnly 'org.projectlombok:lombok:1.18.32'
+        testAnnotationProcessor 'org.projectlombok:lombok:1.18.32'
 
-    // ===== 딥러닝/GBDT =====
-    implementation 'org.deeplearning4j:deeplearning4j-core'                    // DL4J 코어(LSTM/Transformer 등)
-    implementation 'org.nd4j:nd4j-native-platform'                             // DL4J 연산 백엔드(CPU 네이티브)
-    implementation 'ml.dmlc:xgboost4j'                                         // XGBoost 자바 바인딩(GBDT/LTR)
-    implementation 'ml.dmlc:xgboost4j-spark'                                   // (스파크 사용 시) 분산 학습/예측
+        // JUnit 5
+        testImplementation 'org.junit.jupiter:junit-jupiter-api:5.10.2'
+        testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine:5.10.2'
+    }
 
-    // ===== Smile(통계/ML) =====
-    implementation 'com.github.haifengl:smile-core'                            // Smile 코어(클러스터링/통계/ML)
-    implementation 'com.github.haifengl:smile-graph'                           // (선택) 그래프/네트워크 알고리즘
-    implementation 'com.github.haifengl:smile-nlp'                             // (선택) 간단 NLP 유틸
-
-    // ===== Tribuo(자바 ML) =====
-    implementation 'org.tribuo:tribuo-core'                                     // Tribuo 코어
-    implementation 'org.tribuo:tribuo-classification'                           // 분류
-    implementation 'org.tribuo:tribuo-clustering'                               // 군집(K-Means 등)
-    implementation 'org.tribuo:tribuo-regression'                               // 회귀
-
-    // ===== 규칙 엔진(Drools/KIE) =====
-    implementation 'org.drools:drools-core:10.1.0'                             // 규칙엔진 코어(실적/제외 룰)
-    implementation 'org.drools:drools-compiler:10.1.0'                         // DRL 규칙 컴파일러
-    implementation 'org.kie:kie-api:10.1.0'                                    // KIE 공통 API
-    implementation 'org.kie:kie-ci:10.1.0'                                     // (선택) 규칙 변경 감지/재로딩
-
-    implementation 'org.springframework.boot:spring-boot-starter'
-	testImplementation 'org.springframework.boot:spring-boot-starter-test'
-	testRuntimeOnly 'org.junit.platform:junit-platform-launcher'
-}
-
-tasks.named('test') {
-	useJUnitPlatform()
+    tasks.withType(Test).configureEach {
+        useJUnitPlatform()
+    }
 }
