@@ -1,1 +1,6 @@
-rootProject.name = 'perli-ai'
+rootProject.name = "perli-ai"
+
+include("app-api")
+include("ml-train")
+include("dl-train")
+include("common")

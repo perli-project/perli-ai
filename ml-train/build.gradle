@@ -1,0 +1,20 @@
+plugins {
+    id 'java'
+}
+
+dependencies {
+    // Tribuo - 필요한 모듈만
+    implementation 'org.tribuo:tribuo-core:4.3.1'
+    implementation 'org.tribuo:tribuo-classification:4.3.1'
+    implementation 'org.tribuo:tribuo-clustering:4.3.1'
+    implementation 'org.tribuo:tribuo-regression:4.3.1'
+    implementation 'org.tribuo:tribuo-json:4.3.1'
+
+    // H2O.ai - 학습/업리프트/모델링
+    implementation 'ai.h2o:h2o-core:3.46.0.1'
+    implementation 'ai.h2o:h2o-algos:3.46.0.1'
+    implementation 'ai.h2o:h2o-genmodel:3.46.0.1'
+
+    // CSV/데이터 유틸
+    implementation 'org.apache.commons:commons-csv:1.10.0'
+}
