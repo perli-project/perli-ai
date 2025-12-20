@@ -16,8 +16,8 @@
     <td><strong>소비 패턴 분석</strong></td>
     <td>
       <img src="https://img.shields.io/badge/Tribuo-E35A5A?style=for-the-badge">
-    <img src="https://img.shields.io/badge/smile-E35A5A?style=for-the-badge">
-<img src="https://img.shields.io/badge/deep learning4j-E35A5A?style=for-the-badge">
+      <img src="https://img.shields.io/badge/deep learning4j-E35A5A?style=for-the-badge">
+<img src="https://img.shields.io/badge/nd4j-E35A5A?style=for-the-badge">
     </td>
     
   </tr>
@@ -25,14 +25,12 @@
     <td><strong>카드 순위화 및 추천</strong></td>
     <td>
       <img src="https://img.shields.io/badge/H2o.ai-FF8A2A?style=for-the-badge">
-<img src="https://img.shields.io/badge/XGBoost-FF8A2A?style=for-the-badge">
     </td>
   </tr>
   <tr>
     <td><strong>카드 실적 최적 플랜</strong></td>
     <td>
-        <img src="https://img.shields.io/badge/Google_OR_Tools-FFCC00?style=for-the-badge">
-        <img src="https://img.shields.io/badge/OPTA_Planner-FFCC00?style=for-the-badge">
+        <img src="https://img.shields.io/badge/TimeFold-FFCC00?style=for-the-badge">
     </td>
   </tr>
 </table>
