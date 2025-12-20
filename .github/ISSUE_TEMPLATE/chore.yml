@@ -1,7 +1,7 @@
-name: "⚙️ 개발 환경 설정"
+name: "🧹 개발 환경 설정"
 description: "개발을 위한 환경 설정 및 도구 구성 작업을 정의하고 추적합니다."
 title: "[Chore] "
-labels: ["⚙️ Chore"]
+labels: ["🧹 Chore"]
 body:
   - type: textarea
     id: summary

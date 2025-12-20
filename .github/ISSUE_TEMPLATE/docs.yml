@@ -1,7 +1,7 @@
-name: "📝 문서 수정 및 추가"
+name: "📚 문서 수정 및 추가"
 description: "README.md 또는 프로젝트 문서(Docs)를 수정하거나 추가합니다."
 title: "[Docs] "
-labels: ["📝 Documentation"]
+labels: ["📚 Docs"]
 body:
   - type: textarea
     id: objective
