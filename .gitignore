@@ -36,4 +36,7 @@ out/
 ### VS Code ###
 .vscode/
 
-resources
+##
+resources/metadata
+resources/raw
+resources/output/logs

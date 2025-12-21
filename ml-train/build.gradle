@@ -2,6 +2,11 @@ plugins {
     id 'java'
 }
 
+java {
+    toolchain {
+        languageVersion = JavaLanguageVersion.of(17)
+    }
+}
 dependencies {
 
     implementation project(':common')
@@ -14,8 +19,6 @@ dependencies {
     implementation 'org.tribuo:tribuo-json:4.3.1'
 
     // H2O.ai - 학습/업리프트/모델링
-    implementation 'ai.h2o:h2o-core:3.46.0.1'
-    implementation 'ai.h2o:h2o-algos:3.46.0.1'
-    implementation 'ai.h2o:h2o-genmodel:3.46.0.1'
+    implementation 'ai.h2o:h2o-app:3.46.0.1'
 
 }
