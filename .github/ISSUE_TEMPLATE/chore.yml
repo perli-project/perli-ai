@@ -41,7 +41,6 @@ body:
         - [ ] 설정 파일 추가/수정
         - [ ] 개발 환경 테스트 및 검증
         - [ ] PR 생성 및 코드 리뷰 요청
-      render: markdown
     validations:
       required: true
   - type: textarea

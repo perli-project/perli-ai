@@ -32,7 +32,6 @@ body:
         - [ ] 현재 README 오타 검토
         - [ ] 바뀐 환경 변수 설정값 업데이트
         - [ ] 이미지 링크 깨짐 확인 및 수정
-      render: markdown
     validations:
       required: true
   - type: textarea

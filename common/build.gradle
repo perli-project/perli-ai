@@ -5,4 +5,7 @@ plugins {
 dependencies {
     // 공통 객체에서 사용할 Jackson 설정
     api 'com.fasterxml.jackson.core:jackson-annotations:2.15.2'
+
+    // CSV/데이터 유틸
+    implementation 'org.apache.commons:commons-csv:1.10.0'
 }
