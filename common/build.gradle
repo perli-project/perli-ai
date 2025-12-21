@@ -2,6 +2,12 @@ plugins {
     id 'java-library' // 참조를 위해 반드시 library여야 함
 }
 
+java {
+    toolchain {
+        languageVersion = JavaLanguageVersion.of(17)
+    }
+}
+
 dependencies {
     // 공통 객체에서 사용할 Jackson 설정
     api 'com.fasterxml.jackson.core:jackson-annotations:2.15.2'
