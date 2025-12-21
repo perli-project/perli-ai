@@ -60,15 +60,15 @@ public class MLTrainService {
             params._ignored_columns = new String[]{"card_id"};
 
             // 모델 세부 설정
-            params._ntrees = 500;                // 나무 개수를 대폭 늘림 (기존 100)
-            params._max_depth = 10;              // 나무 깊이를 깊게 하여 복잡한 패턴 학습 (기존 5)
-            params._learn_rate = 0.05;           // 학습률을 낮춰 더 세밀하게 최적화 (기존 0.1)
-            params._min_rows = 5;                // 노드당 최소 데이터 수 (디테일 강화)
+            params._ntrees = 500;                // 나무 개수를 500개로 설정 
+            params._max_depth = 10;              // 나무 깊이를 깊게 설정
+            params._learn_rate = 0.05;           // 학습률을 낮춰 더 세밀하게 최적화
+            params._min_rows = 5;                // 노드당 최소 데이터 수 5개
             params._sample_rate = 0.8;           // 데이터의 80%만 무작위 사용 (과적합 방지)
             params._col_sample_rate = 0.8;       // 피처의 80%만 무작위 사용
             params._seed = 1234L;
 
-            // 조기 종료 로직 고도화 (성능 개선이 멈추면 자동으로 중단)
+            // 조기 종료 로직
             params._stopping_rounds = 5;         // 5번 연속 개선 안 되면 멈춤
             params._stopping_tolerance = 0.0001; // 아주 미세한 오차 개선까지 추적
 
