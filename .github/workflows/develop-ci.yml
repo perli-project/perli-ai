@@ -5,7 +5,7 @@ on:
     branches: [ "develop" ]
   pull_request:
     branches: [ "develop" ]
-
+    types: [opened, synchronize, reopened] # PR이 열리거나 코드가 업데이트될 때 강제 실행
 jobs:
   build-and-benchmark:
     runs-on: ubuntu-latest
