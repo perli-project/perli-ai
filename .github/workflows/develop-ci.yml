@@ -61,7 +61,8 @@ jobs:
           git reset --hard
           git clean -fd
 
-      - name: Store Benchmark Result
+      - name: Store Benchmark Result (push only)
+        if: github.event_name == 'push'
         uses: benchmark-action/github-action-benchmark@v1
         with:
           tool: 'jmh'
@@ -72,6 +73,16 @@ jobs:
           alert-threshold: '120%'
           fail-threshold: '300%'
           fail-on-alert: false
+          comment-on-alert: true
+
+      - name: Store Benchmark Result (PR - no push)
+        if: github.event_name == 'pull_request'
+        uses: benchmark-action/github-action-benchmark@v1
+        with:
+          tool: 'jmh'
+          output-file-path: ml-train/build/reports/jmh/results.json
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          auto-push: false
           comment-on-alert: true
 
       - name: SonarCloud Scan
