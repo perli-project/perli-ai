@@ -1,5 +1,5 @@
 window.BENCHMARK_DATA = {
-  "lastUpdate": 1766483490550,
+  "lastUpdate": 1766505981939,
   "repoUrl": "https://github.com/perli-project/perli-ai",
   "entries": {
     "Benchmark": [
@@ -88,6 +88,36 @@ window.BENCHMARK_DATA = {
           {
             "name": "aicard.perli.ml.benchmark.UpliftBenchmark.benchmarkPredictUplift",
             "value": 6.317454497761404e-7,
+            "unit": "ms/op",
+            "extra": "iterations: 1\nforks: 1\nthreads: 1"
+          }
+        ]
+      },
+      {
+        "commit": {
+          "author": {
+            "email": "81628455+WhiteBin-bin@users.noreply.github.com",
+            "name": "Baek HyeonBin",
+            "username": "WhiteBin-bin"
+          },
+          "committer": {
+            "email": "noreply@github.com",
+            "name": "GitHub",
+            "username": "web-flow"
+          },
+          "distinct": true,
+          "id": "06a1d78f517c264c00678d133ddc36c3bccb3d88",
+          "message": "✨ Feat: Tribuo 기반 카드 순위화(LTR) 베이스 모델 구축 (#18)",
+          "timestamp": "2025-12-24T01:03:24+09:00",
+          "tree_id": "2b1237a6194cb582ff2801f82028e0436e6184a3",
+          "url": "https://github.com/perli-project/perli-ai/commit/06a1d78f517c264c00678d133ddc36c3bccb3d88"
+        },
+        "date": 1766505981688,
+        "tool": "jmh",
+        "benches": [
+          {
+            "name": "aicard.perli.ml.benchmark.UpliftBenchmark.benchmarkPredictUplift",
+            "value": 6.34906319209543e-7,
             "unit": "ms/op",
             "extra": "iterations: 1\nforks: 1\nthreads: 1"
           }
