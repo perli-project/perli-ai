@@ -1,5 +1,7 @@
 plugins {
     id 'java'
+    id 'checkstyle' // 추가
+    id "me.champeau.jmh" version "0.7.2" // 추가
 }
 
 allprojects {
@@ -20,23 +22,52 @@ java {
 
 subprojects {
     apply plugin: 'java'
+    apply plugin: 'checkstyle'
+    apply plugin: 'me.champeau.jmh'
 
     dependencies {
-        // Lombok
         compileOnly 'org.projectlombok:lombok:1.18.32'
         annotationProcessor 'org.projectlombok:lombok:1.18.32'
         testCompileOnly 'org.projectlombok:lombok:1.18.32'
         testAnnotationProcessor 'org.projectlombok:lombok:1.18.32'
 
-        // JUnit 5
         testImplementation 'org.junit.jupiter:junit-jupiter-api:5.10.2'
         testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine:5.10.2'
 
-        // SLF4J
         implementation 'org.slf4j:slf4j-api:1.7.36'
         implementation 'ch.qos.logback:logback-classic:1.2.11'
     }
 
+    // Checkstyle 설정
+    checkstyle {
+        toolVersion = "10.12.5"
+        configFile = rootProject.file("config/checkstyle/checkstyle.xml")
+        ignoreFailures = false // 스타일 틀리면 빌드 실패하게 함
+        maxWarnings = 0
+        showViolations = true // 위반 사항을 콘솔에 즉시 출력하도록 설정
+    }
+
+    // JMH 성능 측정 설정 (JSON으로 결과 저장)
+    jmh {
+        // 횟수 최소화
+        warmupIterations = 1
+        iterations = 1
+        fork = 1
+
+        // 시간 단위
+        // 각각의 단계를 1초씩만 수행하도록 설정
+        warmup = '1s'           // 예열 시간 1초
+        timeOnIteration = '1s'  // 본 측정 시간 1초
+
+        // 배치 사이즈 조절
+        batchSize = 1
+
+        // 결과 파일 설정 유지
+        resultFormat = 'JSON'
+        resultsFile = project.file("${project.buildDir}/reports/jmh/results.json")
+        benchmarkMode = ['avgt']
+        timeUnit = 'ms'
+    }
     tasks.withType(Test).configureEach {
         useJUnitPlatform()
     }

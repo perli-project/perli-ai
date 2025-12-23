@@ -1,0 +1,85 @@
+name: Java Quality & Performance Suite
+
+on:
+  push:
+    branches: [ "develop" ]
+  pull_request:
+    branches: [ "develop" ]
+    types: [opened, synchronize, reopened] # PR이 열리거나 코드가 업데이트될 때 강제 실행
+jobs:
+  build-and-benchmark:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+      pull-requests: write
+      checks: write
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Set up JDK 21
+        uses: actions/setup-java@v4
+        with:
+          java-version: '21'
+          distribution: 'temurin'
+          cache: 'gradle'
+
+      - name: Grant execute permission for gradlew
+        run: |
+          chmod +x gradlew
+          git update-index --chmod=+x gradlew
+
+      - name: Setup Reviewdog
+        uses: reviewdog/action-setup@v1
+        with:
+          reviewdog_version: latest
+
+      - name: Run Checkstyle with Reviewdog
+        env:
+          REVIEWDOG_GITHUB_API_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          ./gradlew checkstyleMain
+          find . -name "main.xml" | grep "reports/checkstyle" | xargs cat | \
+          reviewdog -f=checkstyle \
+            -reporter=github-pr-review \
+            -filter-mode=added \
+            -fail-on-error=false \
+            -level=error
+
+      - name: Run JMH Benchmark
+        run: ./gradlew :ml-train:jmh
+
+      - name: Cleanup local changes
+        run: |
+          git reset --hard
+          git clean -fd
+
+      - name: Store Benchmark Result
+        uses: benchmark-action/github-action-benchmark@v1
+        with:
+          tool: 'jmh'
+          output-file-path: ml-train/build/reports/jmh/results.json
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          auto-push: true
+          gh-pages-branch: 'gh-pages'
+          alert-threshold: '120%'
+          fail-threshold: '300%'
+          fail-on-alert: false
+          comment-on-alert: true
+
+      - name: SonarCloud Scan
+        uses: SonarSource/sonarqube-scan-action@v5.0.0
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
+        with:
+          args: >
+            -Dsonar.projectKey=${{ secrets.SONAR_PROJECT_KEY }}
+            -Dsonar.organization=${{ secrets.SONAR_ORGANIZATION }}
+            -Dsonar.sources=.
+            -Dsonar.exclusions=**/test/**,**/build/**,**/generated/**
+            -Dsonar.java.binaries=**/build/classes/java/main
+            -Dsonar.qualitygate.wait=false
