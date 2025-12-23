@@ -6,13 +6,15 @@ on:
   pull_request:
     branches: [ "develop" ]
     types: [opened, synchronize, reopened] # PR이 열리거나 코드가 업데이트될 때 강제 실행
+
+permissions:
+  contents: write
+  pull-requests: write
+  checks: write
+
 jobs:
   build-and-benchmark:
     runs-on: ubuntu-latest
-    permissions:
-      contents: write
-      pull-requests: write
-      checks: write
 
     steps:
       - name: Checkout code
