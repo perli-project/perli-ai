@@ -12,11 +12,7 @@ dependencies {
     implementation project(':common')
 
     // Tribuo - 필요한 모듈만
-    implementation 'org.tribuo:tribuo-core:4.3.1'
-    implementation 'org.tribuo:tribuo-classification:4.3.1'
-    implementation 'org.tribuo:tribuo-clustering:4.3.1'
-    implementation 'org.tribuo:tribuo-regression:4.3.1'
-    implementation 'org.tribuo:tribuo-json:4.3.1'
+    implementation 'org.tribuo:tribuo-all:4.3.1'
 
     // H2O.ai - 학습/업리프트/모델링
     implementation 'ai.h2o:h2o-core:3.46.0.1'

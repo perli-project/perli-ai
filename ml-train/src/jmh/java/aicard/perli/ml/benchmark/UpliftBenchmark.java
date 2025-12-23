@@ -1,6 +1,6 @@
 package aicard.perli.ml.benchmark;
 
-import aicard.perli.ml.service.MLInferenceService;
+import aicard.perli.ml.h2o.service.H2oInferenceService;
 import org.openjdk.jmh.annotations.*;
 import java.util.concurrent.TimeUnit;
 
@@ -13,12 +13,12 @@ import java.util.concurrent.TimeUnit;
 @OutputTimeUnit(TimeUnit.MILLISECONDS) // 결과를 밀리초 단위로 출력
 public class UpliftBenchmark {
 
-    private MLInferenceService inferenceService;
+    private H2oInferenceService inferenceService;
 
     @Setup // 벤치마크 시작 전 딱 한 번 실행 (모델 로드)
     public void setup() {
         String modelPath = "C:/Coding/perli-ai/resources/output/models/uplift/gbm_uplift_model.zip";
-        inferenceService = new MLInferenceService(modelPath);
+        inferenceService = new H2oInferenceService(modelPath);
     }
 
     @Benchmark // 실제 성능 측정 대상 메서드
