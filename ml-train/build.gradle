@@ -23,5 +23,13 @@ dependencies {
     implementation 'ai.h2o:h2o-algos:3.46.0.1'
     implementation 'ai.h2o:h2o-app:3.46.0.1'
     implementation 'ai.h2o:h2o-genmodel:3.46.0.1'
+}
 
+tasks.withType(JavaExec) {
+    jvmArgs += [
+            '--add-opens', 'java.base/java.lang=ALL-UNNAMED',
+            '--add-opens', 'java.base/java.util=ALL-UNNAMED',
+            '--add-opens', 'java.base/java.lang.reflect=ALL-UNNAMED',
+            '--add-opens', 'java.base/java.io=ALL-UNNAMED'
+    ]
 }

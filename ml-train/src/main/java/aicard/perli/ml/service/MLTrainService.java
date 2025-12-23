@@ -24,7 +24,7 @@ import java.util.zip.ZipOutputStream;
  * </p>
  */
 @Slf4j
-public class MLTrainService {
+public class  MLTrainService {
 
     /**
      * 지정된 데이터 경로의 CSV 파일을 사용하여 AI 모델을 학습시키고 MOJO 파일을 생성합니다.
@@ -77,7 +77,7 @@ public class MLTrainService {
      * @param model 학습이 완료된 GBM 모델 객체
      */
     private void forceManualMojoAssembly(GBMModel model) {
-        String modelPath = "C:/Coding/perli-ai/resources/output/models/gbm_loyalty_model.zip";
+        String modelPath = "C:/Coding/perli-ai/resources/output/models/uplift/gbm_uplift_model.zip";
         try {
             File modelFile = new File(modelPath);
             if (modelFile.getParentFile() != null) modelFile.getParentFile().mkdirs();
