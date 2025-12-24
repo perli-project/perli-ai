@@ -1,5 +1,5 @@
 window.BENCHMARK_DATA = {
-  "lastUpdate": 1766556147473,
+  "lastUpdate": 1766558088462,
   "repoUrl": "https://github.com/perli-project/perli-ai",
   "entries": {
     "Benchmark": [
@@ -208,6 +208,36 @@ window.BENCHMARK_DATA = {
           {
             "name": "aicard.perli.ml.benchmark.UpliftBenchmark.benchmarkPredictUplift",
             "value": 6.486226426248861e-7,
+            "unit": "ms/op",
+            "extra": "iterations: 1\nforks: 1\nthreads: 1"
+          }
+        ]
+      },
+      {
+        "commit": {
+          "author": {
+            "email": "81628455+WhiteBin-bin@users.noreply.github.com",
+            "name": "Baek HyeonBin",
+            "username": "WhiteBin-bin"
+          },
+          "committer": {
+            "email": "noreply@github.com",
+            "name": "GitHub",
+            "username": "web-flow"
+          },
+          "distinct": true,
+          "id": "d1127ff0dda759e5f7574e3ac7d02df004038fe4",
+          "message": "🔨  Refactor: 데이터 생성 파이프라인 구조화 및 Generator 패키지 재정리 (#22)",
+          "timestamp": "2025-12-24T15:32:49+09:00",
+          "tree_id": "259c670d54e92edc23e954c80c97740929183434",
+          "url": "https://github.com/perli-project/perli-ai/commit/d1127ff0dda759e5f7574e3ac7d02df004038fe4"
+        },
+        "date": 1766558087848,
+        "tool": "jmh",
+        "benches": [
+          {
+            "name": "aicard.perli.ml.benchmark.UpliftBenchmark.benchmarkPredictUplift",
+            "value": 6.329017132160405e-7,
             "unit": "ms/op",
             "extra": "iterations: 1\nforks: 1\nthreads: 1"
           }
