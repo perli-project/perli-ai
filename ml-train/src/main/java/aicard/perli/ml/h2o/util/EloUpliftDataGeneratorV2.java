@@ -46,7 +46,7 @@ public class EloUpliftDataGeneratorV2 {
             }
             System.out.println("가맹점 매출 데이터 인덱싱 완료");
 
-            // 2. [New Transactions] 카드별 최신 소비 행태 집계
+            // 카드별 최신 소비 행태 집계
             Map<String, CardUpliftStats> statsMap = new HashMap<>();
             try (BufferedReader br = new BufferedReader(new FileReader(newTransFile))) {
                 String header = br.readLine().replace("\"", "");
@@ -83,7 +83,7 @@ public class EloUpliftDataGeneratorV2 {
             }
             System.out.println("신규 거래 기반 소비 패턴 집계 완료");
 
-            // 3. [Train Join] 최종 업리프트 데이터셋 생성
+            // 최종 업리프트 데이터셋 생성
             try (BufferedReader br = new BufferedReader(new FileReader(trainFile));
                  BufferedWriter bw = new BufferedWriter(new FileWriter(resultFile))) {
 
