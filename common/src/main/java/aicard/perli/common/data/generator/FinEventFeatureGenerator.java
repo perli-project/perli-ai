@@ -33,7 +33,7 @@ public class FinEventFeatureGenerator {
 
             long endTime = System.currentTimeMillis();
 
-            // 3. 결과 보고
+            // 결과 보고
             System.out.println("표준 피처 생성 완료!");
             System.out.println("파일 경로: " + outputPath);
             System.out.println("소요 시간: " + (endTime - startTime) / 1000.0 + "초");
