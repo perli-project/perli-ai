@@ -1,5 +1,5 @@
 window.BENCHMARK_DATA = {
-  "lastUpdate": 1766556136286,
+  "lastUpdate": 1766556147473,
   "repoUrl": "https://github.com/perli-project/perli-ai",
   "entries": {
     "Benchmark": [
@@ -178,6 +178,36 @@ window.BENCHMARK_DATA = {
           {
             "name": "aicard.perli.ml.benchmark.UpliftBenchmark.benchmarkPredictUplift",
             "value": 6.311616617606521e-7,
+            "unit": "ms/op",
+            "extra": "iterations: 1\nforks: 1\nthreads: 1"
+          }
+        ]
+      },
+      {
+        "commit": {
+          "author": {
+            "email": "98319061+saranghein@users.noreply.github.com",
+            "name": "LeeHaeIn",
+            "username": "saranghein"
+          },
+          "committer": {
+            "email": "81628455+WhiteBin-bin@users.noreply.github.com",
+            "name": "Baek HyeonBin",
+            "username": "WhiteBin-bin"
+          },
+          "distinct": true,
+          "id": "d837bae02c2875664f86f045bae0ccb4760c1cf1",
+          "message": ":whale: Devops: ci 파일 수정\n\n- ci 파일에서 벤치마크 조건 걸었습니다.",
+          "timestamp": "2025-12-24T15:00:24+09:00",
+          "tree_id": "01366f0852b591411420b38ebf7daa46ce5a52da",
+          "url": "https://github.com/perli-project/perli-ai/commit/d837bae02c2875664f86f045bae0ccb4760c1cf1"
+        },
+        "date": 1766556147185,
+        "tool": "jmh",
+        "benches": [
+          {
+            "name": "aicard.perli.ml.benchmark.UpliftBenchmark.benchmarkPredictUplift",
+            "value": 6.486226426248861e-7,
             "unit": "ms/op",
             "extra": "iterations: 1\nforks: 1\nthreads: 1"
           }
