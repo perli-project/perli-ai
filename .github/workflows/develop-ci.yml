@@ -92,8 +92,8 @@ jobs:
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
         with:
           args: >
-            -Dsonar.projectKey=${{ secrets.SONAR_PROJECT_KEY }}
-            -Dsonar.organization=${{ secrets.SONAR_ORGANIZATION }}
+            -Dsonar.projectKey=perli-project_perli-ai
+            -Dsonar.organization=perli-project
             -Dsonar.sources=.
             -Dsonar.exclusions=**/test/**,**/build/**,**/generated/**
             -Dsonar.java.binaries=**/build/classes/java/main
