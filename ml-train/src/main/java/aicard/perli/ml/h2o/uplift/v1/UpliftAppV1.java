@@ -18,8 +18,8 @@ public class UpliftAppV1 {
         log.info("==========================================================");
 
         // 뼈대 데이터 및 V1 모델 ZIP 경로
-        String dataPath = "C:/Coding/perli-ai/resources/processed/uplift/v1/train_uplift_v1.csv";
-        String modelPath = "C:/Coding/perli-ai/resources/output/models/uplift/v1/uplift_gbm_model_v1.zip";
+        String dataPath = "C:/Coding/perli-ai/resources/processed/h2o/v1/train_uplift_v1.csv";
+        String modelPath = "C:/Coding/perli-ai/resources/output/models/h2o/v1/uplift_gbm_model_v1.zip";
 
         // 모델 학습 및 MOJO 조립 절차 수행 (Reflection 기반 버그 우회 포함)
         H2oTrainServiceV1 trainService = new H2oTrainServiceV1();
