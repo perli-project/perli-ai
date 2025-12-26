@@ -2,7 +2,7 @@ package aicard.perli.ml.h2o.uplift.v2;
 
 import aicard.perli.ml.h2o.service.v1.H2oInferenceServiceV1;
 import aicard.perli.ml.h2o.service.v2.H2oInferenceServiceV2;
-import aicard.perli.ml.h2o.service.v2.H2oUpliftTrainerV2;
+import aicard.perli.ml.h2o.service.v2.H2oTrainServiceV2;
 import lombok.extern.slf4j.Slf4j;
 
 /**
@@ -22,13 +22,13 @@ public class UpliftAppV2 {
         log.info("==========================================================");
 
         // 고도화 모델 학습
-        String v2DataPath = "C:/Coding/perli-ai/resources/processed/uplift/v2/train_uplift_v2.csv";
-        H2oUpliftTrainerV2 v2Trainer = new H2oUpliftTrainerV2();
+        String v2DataPath = "C:/Coding/perli-ai/resources/processed/h2o/v2/train_uplift_v2.csv";
+        H2oTrainServiceV2 v2Trainer = new H2oTrainServiceV2();
         v2Trainer.trainV2(v2DataPath);
 
         // 경로 설정
-        String v1ModelPath = "C:/Coding/perli-ai/resources/output/models/uplift/v1/uplift_gbm_model_v1.zip";
-        String v2ModelPath = "C:/Coding/perli-ai/resources/output/models/uplift/v2/uplift_drf_model_v2.zip";
+        String v1ModelPath = "C:/Coding/perli-ai/resources/output/models/h2o/v1/uplift_gbm_model_v1.zip";
+        String v2ModelPath = "C:/Coding/perli-ai/resources/output/models/h2o/v2/uplift_drf_model_v2.zip";
 
         // 서비스 로드
         H2oInferenceServiceV1 v1Service = new H2oInferenceServiceV1(v1ModelPath);

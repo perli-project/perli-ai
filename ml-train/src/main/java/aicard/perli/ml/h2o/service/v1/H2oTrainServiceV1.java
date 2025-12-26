@@ -73,7 +73,7 @@ public class H2oTrainServiceV1 {
      * @param model 학습이 완료된 GBM 모델 객체
      */
     private void forceManualMojoAssembly(GBMModel model) {
-        String modelPath = "C:/Coding/perli-ai/resources/output/models/uplift/v1/uplift_gbm_model_v1.zip";
+        String modelPath = "C:/Coding/perli-ai/resources/output/models/h2o/v1/uplift_gbm_model_v1.zip";
         try {
             File modelFile = new File(modelPath);
             if (modelFile.getParentFile() != null) modelFile.getParentFile().mkdirs();

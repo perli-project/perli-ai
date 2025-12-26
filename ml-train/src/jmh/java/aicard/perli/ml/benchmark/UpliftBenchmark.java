@@ -17,7 +17,7 @@ public class UpliftBenchmark {
 
     @Setup // 벤치마크 시작 전 딱 한 번 실행 (모델 로드)
     public void setup() {
-        String modelPath = "C:/Coding/perli-ai/resources/output/models/uplift/gbm_uplift_model.zip";
+        String modelPath = "C:/Coding/perli-ai/resources/output/models/h2o/gbm_uplift_model.zip";
         inferenceService = new H2oInferenceServiceV1(modelPath);
     }
 
