@@ -1,5 +1,5 @@
 window.BENCHMARK_DATA = {
-  "lastUpdate": 1766568853994,
+  "lastUpdate": 1766736294843,
   "repoUrl": "https://github.com/perli-project/perli-ai",
   "entries": {
     "Benchmark": [
@@ -268,6 +268,36 @@ window.BENCHMARK_DATA = {
           {
             "name": "aicard.perli.ml.benchmark.UpliftBenchmark.benchmarkPredictUplift",
             "value": 6.468415046010707e-7,
+            "unit": "ms/op",
+            "extra": "iterations: 1\nforks: 1\nthreads: 1"
+          }
+        ]
+      },
+      {
+        "commit": {
+          "author": {
+            "email": "81628455+WhiteBin-bin@users.noreply.github.com",
+            "name": "Baek HyeonBin",
+            "username": "WhiteBin-bin"
+          },
+          "committer": {
+            "email": "noreply@github.com",
+            "name": "GitHub",
+            "username": "web-flow"
+          },
+          "distinct": true,
+          "id": "4782a1059018304c19fb8746e4ff5a0ee70e4b90",
+          "message": "✨ Feat: Tribuo 기반 XGBoost 랭킹 모델 고도화 및 검증 로직 구현 (#26)",
+          "timestamp": "2025-12-26T17:03:02+09:00",
+          "tree_id": "9e4fe06fe5e13b3ba8a4a71db91d26b346b66273",
+          "url": "https://github.com/perli-project/perli-ai/commit/4782a1059018304c19fb8746e4ff5a0ee70e4b90"
+        },
+        "date": 1766736294549,
+        "tool": "jmh",
+        "benches": [
+          {
+            "name": "aicard.perli.ml.benchmark.UpliftBenchmark.benchmarkPredictUplift",
+            "value": 6.336597427317836e-7,
             "unit": "ms/op",
             "extra": "iterations: 1\nforks: 1\nthreads: 1"
           }
