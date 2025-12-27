@@ -1,6 +1,6 @@
 package aicard.perli.ml.tribuo.util.v1;
 
-import aicard.perli.ml.tribuo.dto.request.v1.CardRequestV1;
+import aicard.perli.ml.tribuo.dto.request.v1.TribuoRequestV1;
 import org.tribuo.*;
 import org.tribuo.impl.ArrayExample;
 import org.tribuo.regression.*;
@@ -11,7 +11,7 @@ import java.util.Collections;
 /**
  * <p>Tribuo 머신러닝 라이브러리를 사용하여 카드 랭킹 학습을 위한 데이터 변환을 담당하는 유틸리티 클래스입니다.</p>
  *
- * <p>이 클래스는 서비스 레이어에서 가공된 {@link CardRequestV1} DTO 리스트를
+ * <p>이 클래스는 서비스 레이어에서 가공된 {@link TribuoRequestV1} DTO 리스트를
  * Tribuo의 표준 데이터셋 규격인 {@link Dataset} (세부적으로는 {@link MutableDataset})으로 변환합니다.
  * 랭킹 알고리즘 구현을 위해 회귀(Regression) 모델인 {@link Regressor} 타입을 기반으로 동작합니다.</p>
  */
@@ -35,7 +35,7 @@ public class TribuoDataConverterV1 {
      * @param requests 가공된 카드 통계 데이터 리스트 (DTO)
      * @return Tribuo 모델 학습에 직접 투입 가능한 Regressor 타입의 Dataset
      */
-    public Dataset<Regressor> convertToDataset(List<CardRequestV1> requests) {
+    public Dataset<Regressor> convertToDataset(List<TribuoRequestV1> requests) {
 
         MutableDataset<Regressor> dataset = new MutableDataset<>(
                 Collections.emptyList(),
@@ -43,7 +43,7 @@ public class TribuoDataConverterV1 {
                 regressionFactory
         );
 
-        for (CardRequestV1 req : requests) {
+        for (TribuoRequestV1 req : requests) {
             // 모델이 학습할 독립 변수(Feature)들을 정의합니다.
             List<Feature> features = new ArrayList<>();
             features.add(new Feature("totalAmount", req.getTotalAmount()));

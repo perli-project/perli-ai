@@ -1,8 +1,8 @@
 package aicard.perli.ml.tribuo.ranking.v2;
 
-import aicard.perli.ml.tribuo.dto.request.v1.CardRequestV1;
-import aicard.perli.ml.tribuo.dto.request.v2.CardRequestV2;
-import aicard.perli.ml.tribuo.dto.response.CardResponse;
+import aicard.perli.ml.tribuo.dto.request.v1.TribuoRequestV1;
+import aicard.perli.ml.tribuo.dto.request.v2.TribuoRequestV2;
+import aicard.perli.ml.tribuo.dto.response.TribuoResponse;
 import aicard.perli.ml.tribuo.service.v1.TribuoInferenceServiceV1;
 import aicard.perli.ml.tribuo.service.v1.TribuoRecommendationServiceV1;
 import aicard.perli.ml.tribuo.service.v2.TribuoInferenceServiceV2;
@@ -45,12 +45,12 @@ public class RankingAppV2 {
             TribuoRecommendationServiceV2 recV2 = new TribuoRecommendationServiceV2(infV2);
 
             // 테스트 데이터 구성 (V1 vs V2)
-            CardRequestV1 testUserV1 = new CardRequestV1("USER_001", 5000000.0, 120.0, 0.95, 45000.0, 0.0);
-            CardRequestV2 testUserV2 = new CardRequestV2("USER_001", 5000000.0, 120, 0.95, 45000.0, 15.0, 850000.0, 0.75);
+            TribuoRequestV1 testUserV1 = new TribuoRequestV1("USER_001", 5000000.0, 120.0, 0.95, 45000.0, 0.0);
+            TribuoRequestV2 testUserV2 = new TribuoRequestV2("USER_001", 5000000.0, 120, 0.95, 45000.0, 15.0, 850000.0, 0.75);
 
             // 결과 산출
-            List<CardResponse> resV1 = recV1.getRankedRecommendations(Arrays.asList(testUserV1));
-            List<CardResponse> resV2 = recV2.getRankedRecommendationsV2(Arrays.asList(testUserV2));
+            List<TribuoResponse> resV1 = recV1.getRankedRecommendations(Arrays.asList(testUserV1));
+            List<TribuoResponse> resV2 = recV2.getRankedRecommendationsV2(Arrays.asList(testUserV2));
 
             log.info("----------------------------------------------------------");
             log.info("V1 Score : {}", String.format("%.6f", resV1.get(0).getScore()));

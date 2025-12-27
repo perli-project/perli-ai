@@ -2,7 +2,7 @@ package aicard.perli.ml.tribuo.service.v1;
 
 import aicard.perli.common.data.loader.CsvDataLoader;
 import aicard.perli.common.data.parser.FinEventParser;
-import aicard.perli.ml.tribuo.dto.request.v1.CardRequestV1;
+import aicard.perli.ml.tribuo.dto.request.v1.TribuoRequestV1;
 import aicard.perli.ml.tribuo.util.v1.TribuoDataConverterV1;
 import lombok.extern.slf4j.Slf4j;
 import org.tribuo.Dataset;
@@ -43,14 +43,14 @@ public class TribuoTrainServiceV1 {
         log.info("데이터 집계 및 가공 CSV 생성 완료");
 
         // 가공 데이터 로드 (DTO 변환)
-        List<CardRequestV1> dtoList = new ArrayList<>();
+        List<TribuoRequestV1> dtoList = new ArrayList<>();
         try (BufferedReader br = new BufferedReader(new FileReader(processedPath, StandardCharsets.UTF_8))) {
             br.readLine(); // 헤더 스킵
             String line;
             while ((line = br.readLine()) != null) {
                 String[] s = line.split(",");
                 // 0:card_id, 1:total_sum, 2:count, 6:auth_ratio, 5:avg_amt, 7:target
-                dtoList.add(new CardRequestV1(
+                dtoList.add(new TribuoRequestV1(
                         s[0],
                         Double.parseDouble(s[1]),
                         Double.parseDouble(s[2]),

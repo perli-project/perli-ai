@@ -1,6 +1,6 @@
 package aicard.perli.ml.tribuo.service.v2;
 
-import aicard.perli.ml.tribuo.dto.request.v2.CardRequestV2;
+import aicard.perli.ml.tribuo.dto.request.v2.TribuoRequestV2;
 import lombok.extern.slf4j.Slf4j;
 import org.tribuo.Model;
 import org.tribuo.Prediction;
@@ -40,7 +40,7 @@ public class TribuoInferenceServiceV2 {
      * @param request 최신 행동 데이터가 포함된 카드 정보
      * @return 예측된 랭킹 점수 (double)
      */
-    public double predictScoreV2(CardRequestV2 request) {
+    public double predictScoreV2(TribuoRequestV2 request) {
         if (model == null) return 0.0;
 
         String[] fNames = {"feature_1", "feature_2", "feature_3", "new_tx_count", "new_total_amt", "premium_ratio"};
