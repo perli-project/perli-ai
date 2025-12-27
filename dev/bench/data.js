@@ -1,5 +1,5 @@
 window.BENCHMARK_DATA = {
-  "lastUpdate": 1766736294843,
+  "lastUpdate": 1766808034869,
   "repoUrl": "https://github.com/perli-project/perli-ai",
   "entries": {
     "Benchmark": [
@@ -298,6 +298,36 @@ window.BENCHMARK_DATA = {
           {
             "name": "aicard.perli.ml.benchmark.UpliftBenchmark.benchmarkPredictUplift",
             "value": 6.336597427317836e-7,
+            "unit": "ms/op",
+            "extra": "iterations: 1\nforks: 1\nthreads: 1"
+          }
+        ]
+      },
+      {
+        "commit": {
+          "author": {
+            "email": "81628455+WhiteBin-bin@users.noreply.github.com",
+            "name": "Baek HyeonBin",
+            "username": "WhiteBin-bin"
+          },
+          "committer": {
+            "email": "noreply@github.com",
+            "name": "GitHub",
+            "username": "web-flow"
+          },
+          "distinct": true,
+          "id": "8c3c727141236ea41d23d02e50dfdd4e5e00d051",
+          "message": "✨ Feat: LSTM 지출 예측 모델 학습 파이프라인 구축 및 모델 생성 (#30)",
+          "timestamp": "2025-12-27T12:57:27+09:00",
+          "tree_id": "2034f4fbef13a1cb9c5dfc27a79da6cf90392ae4",
+          "url": "https://github.com/perli-project/perli-ai/commit/8c3c727141236ea41d23d02e50dfdd4e5e00d051"
+        },
+        "date": 1766808034599,
+        "tool": "jmh",
+        "benches": [
+          {
+            "name": "aicard.perli.ml.benchmark.UpliftBenchmark.benchmarkPredictUplift",
+            "value": 6.338544173910082e-7,
             "unit": "ms/op",
             "extra": "iterations: 1\nforks: 1\nthreads: 1"
           }
