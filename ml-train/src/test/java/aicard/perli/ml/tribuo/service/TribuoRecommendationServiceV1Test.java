@@ -1,7 +1,7 @@
 package aicard.perli.ml.tribuo.service;
 
-import aicard.perli.ml.tribuo.dto.request.v1.CardRequestV1;
-import aicard.perli.ml.tribuo.dto.response.CardResponse;
+import aicard.perli.ml.tribuo.dto.request.v1.TribuoRequestV1;
+import aicard.perli.ml.tribuo.dto.response.TribuoResponse;
 import aicard.perli.ml.tribuo.service.v1.TribuoInferenceServiceV1;
 import aicard.perli.ml.tribuo.service.v1.TribuoRecommendationServiceV1;
 import org.junit.jupiter.api.Test;
@@ -24,14 +24,14 @@ class TribuoRecommendationServiceV1Test {
         TribuoRecommendationServiceV1 engine = new TribuoRecommendationServiceV1(inferenceService);
 
         // 가상의 후보 카드 데이터 (V1 규격: 6개 필드 준수)
-        List<CardRequestV1> candidates = List.of(
-                new CardRequestV1("CARD_A", 5000000.0, 100.0, 0.98, 50000.0, 0.0),
-                new CardRequestV1("CARD_B", 100000.0, 5.0, 0.50, 20000.0, 0.0),
-                new CardRequestV1("CARD_C", 2500000.0, 60.0, 0.90, 41000.0, 0.0)
+        List<TribuoRequestV1> candidates = List.of(
+                new TribuoRequestV1("CARD_A", 5000000.0, 100.0, 0.98, 50000.0, 0.0),
+                new TribuoRequestV1("CARD_B", 100000.0, 5.0, 0.50, 20000.0, 0.0),
+                new TribuoRequestV1("CARD_C", 2500000.0, 60.0, 0.90, 41000.0, 0.0)
         );
 
         // 랭킹 산출
-        List<CardResponse> results = engine.getRankedRecommendations(candidates);
+        List<TribuoResponse> results = engine.getRankedRecommendations(candidates);
 
         // 출력 및 검증
         System.out.println("======= 엔진 테스트 결과 =======");

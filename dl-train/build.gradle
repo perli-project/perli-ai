@@ -12,4 +12,9 @@ dependencies {
     // DL4J + ND4J (CPU)
     implementation 'org.deeplearning4j:deeplearning4j-core:1.0.0-M2.1'
     implementation 'org.nd4j:nd4j-native-platform:1.0.0-M2.1'
+
+    // Timefold(OptaPlanner 계열) - 최적화 엔진
+    implementation 'ai.timefold.solver:timefold-solver-core:1.10.0'
+
+    implementation 'org.datavec:datavec-api:1.0.0-M2.1'
 }

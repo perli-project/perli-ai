@@ -13,8 +13,5 @@ java {
 dependencies {
     implementation 'org.springframework.boot:spring-boot-starter-web'
     implementation 'org.springframework.boot:spring-boot-starter-validation'
-
-    // Timefold(OptaPlanner 계열) - 최적화 엔진
-    implementation 'ai.timefold.solver:timefold-solver-spring-boot-starter:1.10.0'
     testImplementation 'org.springframework.boot:spring-boot-starter-test'
 }

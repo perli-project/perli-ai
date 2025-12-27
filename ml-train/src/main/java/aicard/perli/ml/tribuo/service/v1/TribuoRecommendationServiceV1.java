@@ -1,7 +1,7 @@
 package aicard.perli.ml.tribuo.service.v1;
 
-import aicard.perli.ml.tribuo.dto.request.v1.CardRequestV1;
-import aicard.perli.ml.tribuo.dto.response.CardResponse;
+import aicard.perli.ml.tribuo.dto.request.v1.TribuoRequestV1;
+import aicard.perli.ml.tribuo.dto.response.TribuoResponse;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 
@@ -25,7 +25,7 @@ public class TribuoRecommendationServiceV1 {
      * @param candidates 추천 후보 카드들의 통계 데이터(DTO) 리스트
      * @return 추천 점수 내림차순으로 정렬된 결과 리스트
      */
-    public List<CardResponse> getRankedRecommendations(List<CardRequestV1> candidates) {
+    public List<TribuoResponse> getRankedRecommendations(List<TribuoRequestV1> candidates) {
         return candidates.stream()
                 .map(card -> {
                     // 모델을 통한 점수 예측 수행 (기본 4종 피처 활용)
@@ -36,17 +36,17 @@ public class TribuoRecommendationServiceV1 {
                             card.getAvgAmount()
                     );
                     // 응답 DTO 클래스로 변환
-                    return new CardResponse(card.getCardId(), score);
+                    return new TribuoResponse(card.getCardId(), score);
                 })
                 // 점수(Score) 기준 내림차순 정렬
-                .sorted(Comparator.comparingDouble(CardResponse::getScore).reversed())
+                .sorted(Comparator.comparingDouble(TribuoResponse::getScore).reversed())
                 .collect(Collectors.toList());
     }
 
     /**
      * 상위 N개의 카드만 추출하여 반환합니다.
      */
-    public List<CardResponse> getTopNRecommendations(List<CardRequestV1> candidates, int n) {
+    public List<TribuoResponse> getTopNRecommendations(List<TribuoRequestV1> candidates, int n) {
         return getRankedRecommendations(candidates).stream()
                 .limit(n)
                 .collect(Collectors.toList());
