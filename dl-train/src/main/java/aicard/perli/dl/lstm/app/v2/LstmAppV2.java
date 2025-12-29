@@ -1,6 +1,6 @@
 package aicard.perli.dl.lstm.app.v2;
 
-import aicard.perli.dl.lstm.dto.request.advanced.v2.LstmAdvancedRequestV2;
+import aicard.perli.dl.lstm.dto.request.v2.LstmAdvancedRequestV2;
 import aicard.perli.dl.lstm.service.v2.LstmPredictorV2;
 import aicard.perli.dl.lstm.util.converter.v2.LstmDataConverterV2;
 import aicard.perli.dl.lstm.util.loader.v2.LstmDataLoaderV2;
@@ -50,9 +50,9 @@ public class LstmAppV2 {
 
             // 학습 실행 (200 Epochs)
             log.info("Deep Learning 학습 진행 중");
-            for (int i = 1; i <= 200; i++) {
+            for (int i = 1; i <= 1000; i++) {
                 predictor.getModel().fit(features, labels);
-                if (i % 10 == 0) log.info("Epoch [" + i + "/200] 완료");
+                if (i % 10 == 0) log.info("Epoch [" + i + "/1000] 완료");
             }
 
             log.info("모델 성능 검증 시작");

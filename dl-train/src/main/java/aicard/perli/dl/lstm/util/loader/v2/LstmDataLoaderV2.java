@@ -1,6 +1,6 @@
 package aicard.perli.dl.lstm.util.loader.v2;
 
-import aicard.perli.dl.lstm.dto.request.advanced.v2.LstmAdvancedRequestV2;
+import aicard.perli.dl.lstm.dto.request.v2.LstmAdvancedRequestV2;
 import java.io.*;
 import java.util.*;
 

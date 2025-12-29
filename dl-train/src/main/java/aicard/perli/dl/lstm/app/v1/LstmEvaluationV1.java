@@ -1,6 +1,6 @@
 package aicard.perli.dl.lstm.app.v1;
 
-import aicard.perli.dl.lstm.dto.request.advanced.v1.LstmAdvancedRequestV1;
+import aicard.perli.dl.lstm.dto.request.v1.LstmAdvancedRequestV1;
 import aicard.perli.dl.lstm.service.v1.LstmPredictorEvaluationV1;
 import aicard.perli.dl.lstm.util.loader.v1.LstmDataLoaderV1;
 import aicard.perli.dl.lstm.util.converter.v1.LstmDataConverterV1;

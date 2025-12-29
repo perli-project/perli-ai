@@ -1,4 +1,4 @@
-package aicard.perli.dl.lstm.dto.request.advanced.v2;
+package aicard.perli.dl.lstm.dto.request.v2;
 
 import lombok.Data;
 import lombok.NoArgsConstructor;
