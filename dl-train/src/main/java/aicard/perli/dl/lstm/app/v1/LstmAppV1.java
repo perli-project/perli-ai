@@ -4,6 +4,7 @@ import aicard.perli.dl.lstm.dto.request.advanced.v1.LstmAdvancedRequestV1;
 import aicard.perli.dl.lstm.service.v1.LstmPredictorV1;
 import aicard.perli.dl.lstm.util.loader.v1.LstmDataLoaderV1;
 import aicard.perli.dl.lstm.util.converter.v1.LstmDataConverterV1;
+import lombok.extern.slf4j.Slf4j;
 import org.nd4j.linalg.api.ndarray.INDArray;
 import org.nd4j.linalg.factory.Nd4j;
 
@@ -13,6 +14,7 @@ import java.util.List;
 /**
  * LSTM 지출 예측 모델 학습 실행 어플리케이션
  */
+@Slf4j
 public class LstmAppV1 {
 
     public static void main(String[] args) {
@@ -22,14 +24,15 @@ public class LstmAppV1 {
 
         // 경로 설정
         String csvPath = "C:/Coding/perli-ai/resources/processed/lstm/v1/train_lstm_v1.csv";
-        String modelPath = "C:/Coding/perli-ai/resources/output/models/lstm/dl4j_lstm_model_v1.zip";
+        String modelPath = "C:/Coding/perli-ai/resources/output/models/lstm/v1/dl4j_lstm_model_v1.zip";
 
         try {
-            System.out.println("==== 학습 프로세스 시작 ====");
+            log.info("==== 학습 프로세스 시작 ====");
+
 
             // 통합 데이터 로드 (30,000건)
             List<LstmAdvancedRequestV1> rawData = dataLoader.loadTrainingData(csvPath);
-            System.out.println("데이터 로딩 완료: " + rawData.size() + " 건");
+            log.info("데이터 로딩 완료: " + rawData.size() + " 건");
 
             // 모델 초기화 (입력 피처 10개로 고도화)
             predictor.initModel(10, 1);
@@ -45,22 +48,23 @@ public class LstmAppV1 {
             }
 
             // 학습 실행 (50 Epochs)
-            System.out.println("Deep Learning 학습 진행 중...");
+            log.info("Deep Learning 학습 진행 중");
             for (int i = 1; i <= 50; i++) {
                 predictor.getModel().fit(features, labels);
-                if (i % 10 == 0) System.out.println("Epoch [" + i + "/50] 완료");
+                if (i % 10 == 0) log.info("Epoch [" + i + "/50] 완료");
             }
 
             // 완성된 모델 저장
             File saveFile = new File(modelPath);
             predictor.getModel().save(saveFile, true);
 
-            System.out.println("====모델 생성 및 저장 완료 ====");
-            System.out.println("경로: " + saveFile.getAbsolutePath());
+            log.info("====모델 생성 및 저장 완료 ====");
+            log.info("경로: " + saveFile.getAbsolutePath());
 
         } catch (Exception e) {
-            System.err.println("학습 도중 오류가 발생했습니다");
+            log.error("학습 도중 오류가 발생했습니다");
             e.printStackTrace();
         }
+
     }
 }

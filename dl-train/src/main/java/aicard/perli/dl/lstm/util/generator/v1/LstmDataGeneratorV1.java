@@ -1,5 +1,7 @@
 package aicard.perli.dl.lstm.util.generator.v1;
 
+import lombok.extern.slf4j.Slf4j;
+
 import java.io.*;
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -11,6 +13,7 @@ import java.util.List;
  * LSTM 학습을 위해 UCI(시계열), Advanced(통계), CC(성향) 데이터를 통합하는 유틸리티.
  * ID 불일치 문제를 해결하기 위해 인덱스 기반의 순차적 매칭(Sequential Matching) 방식을 사용함.
  */
+@Slf4j
 public class LstmDataGeneratorV1 {
 
     /**
@@ -53,7 +56,7 @@ public class LstmDataGeneratorV1 {
                     count++;
                 }
 
-                System.out.println("통합 완료: " + targetPath + " (총 " + count + "건)");
+                log.info("통합 완료: " + targetPath + " (총 " + count + "건)");
             }
         } catch (IOException e) {
             e.printStackTrace();

@@ -1,5 +1,7 @@
 package aicard.perli.ml.h2o.util.v2;
 
+import lombok.extern.slf4j.Slf4j;
+
 import java.io.*;
 import java.nio.file.*;
 import java.util.*;
@@ -11,11 +13,11 @@ import java.util.*;
  * 2. <b>merchants.csv</b>: 가맹점 마스터 정보 (매출 등급 등 속성 추출용)
  * 3. <b>new_merchant_transactions.csv</b>: 최신 거래 내역 (행동 데이터 추출용)
  * </p>
- * <p>V2 고도화 내용:
  * - 가맹점 매출 규모(sales_range)를 반영한 '프리미엄 소비 비중' 피처 추가
  * - S-Learner 학습을 위한 가상 처치 변수(is_recommended) 생성
  * </p>
  */
+@Slf4j
 public class H2oDataGeneratorV2 {
 
     public static void main(String[] args) {
@@ -44,7 +46,8 @@ public class H2oDataGeneratorV2 {
                     }
                 }
             }
-            System.out.println("가맹점 매출 데이터 인덱싱 완료");
+
+            log.info("가맹점 매출 데이터 인덱싱 완료");
 
             // 카드별 최신 소비 행태 집계
             Map<String, CardUpliftStats> statsMap = new HashMap<>();
@@ -81,7 +84,8 @@ public class H2oDataGeneratorV2 {
                     }
                 }
             }
-            System.out.println("신규 거래 기반 소비 패턴 집계 완료");
+
+            log.info("신규 거래 기반 소비 패턴 집계 완료");
 
             // 최종 업리프트 데이터셋 생성
             try (BufferedReader br = new BufferedReader(new FileReader(trainFile));
@@ -107,11 +111,12 @@ public class H2oDataGeneratorV2 {
                     bw.newLine();
                     count++;
                 }
-                System.out.println("train_uplift_v2.csv 생성 완료 (총 " + count + "건)");
+
+                log.info("train_uplift_v2.csv 생성 완료 (총 " + count + "건)");
             }
 
         } catch (Exception e) {
-            System.err.println("데이터 생성 중 오류: " + e.getMessage());
+            log.error("데이터 생성 중 오류: " + e.getMessage());
         }
     }
 
