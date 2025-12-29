@@ -10,7 +10,6 @@ import ai.timefold.solver.core.api.score.stream.ConstraintCollectors;
 
 /**
  * 카드 혜택 최적화를 위한 채점 규칙 정의 클래스.
- * <p>
  * Timefold 엔진이 각 지출 항목을 카드에 할당할 때
  * 점수(Hard/Soft Score)를 계산하는 기준을 제공합니다.
  * </p>

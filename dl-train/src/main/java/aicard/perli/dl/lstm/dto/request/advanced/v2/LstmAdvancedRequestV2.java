@@ -5,7 +5,7 @@ import lombok.NoArgsConstructor;
 import lombok.AllArgsConstructor;
 
 /**
- * 고도화된 통합 데이터셋(UCI + Advanced + CC + Demographics) 매핑 DTO.
+ * 통합 데이터셋(UCI + Advanced + CC + Demographics) 매핑 DTO.
  * 기존 시계열 및 통계 데이터에 인구통계학적 특성을 추가함.
  */
 @Data
@@ -16,7 +16,7 @@ public class LstmAdvancedRequestV2 {
     private String id;       // 레코드 식별자
     private double limitBal; // 카드 한도
 
-    // === 인구통계학적 피처 (Demographics) ===
+    /** 인구통계학적 피처 */
     private int sex;         // 성별 (1:남성, 2:여성)
     private int education;   // 교육 수준 (1:대학원, 2:대졸, 3:고졸, 4:기타)
     private int marriage;    // 결혼 상태 (1:기혼, 2:미혼, 3:기타)

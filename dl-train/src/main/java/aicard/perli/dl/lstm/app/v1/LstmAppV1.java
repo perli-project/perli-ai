@@ -12,7 +12,7 @@ import java.io.File;
 import java.util.List;
 
 /**
- * LSTM 지출 예측 모델 학습 실행 어플리케이션
+ * LSTM 지출 예측 모델 학습 실행 어플리케이션 V1
  */
 @Slf4j
 public class LstmAppV1 {

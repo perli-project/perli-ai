@@ -1,8 +1,8 @@
 package aicard.perli.dl.lstm.service.v2;
 
-import aicard.perli.dl.lstm.dto.request.advanced.v1.LstmAdvancedRequestV1;
-import aicard.perli.dl.lstm.util.loader.v1.LstmDataLoaderV1;
-import aicard.perli.dl.lstm.util.converter.v1.LstmDataConverterV1;
+import aicard.perli.dl.lstm.dto.request.advanced.v2.LstmAdvancedRequestV2;
+import aicard.perli.dl.lstm.util.converter.v2.LstmDataConverterV2;
+import aicard.perli.dl.lstm.util.loader.v2.LstmDataLoaderV2;
 import lombok.Getter;
 import lombok.extern.slf4j.Slf4j;
 import org.deeplearning4j.nn.conf.MultiLayerConfiguration;
@@ -29,8 +29,8 @@ import java.util.List;
 public class LstmPredictorV2 {
 
     private MultiLayerNetwork model;
-    private final LstmDataLoaderV1 dataLoader = new LstmDataLoaderV1();
-    private final LstmDataConverterV1 converter = new LstmDataConverterV1();
+    private final LstmDataLoaderV2 dataLoader = new LstmDataLoaderV2();
+    private final LstmDataConverterV2 converter = new LstmDataConverterV2();
 
     /**
      * 통합 데이터셋을 활용한 전체 학습 프로세스 실행 및 모델 저장.
@@ -39,7 +39,7 @@ public class LstmPredictorV2 {
      */
     public void runTraining(String csvPath, String modelSavePath) throws Exception {
         // 데이터 로드 및 텐서 변환
-        List<LstmAdvancedRequestV1> rawData = dataLoader.loadTrainingData(csvPath);
+        List<LstmAdvancedRequestV2> rawData = dataLoader.loadTrainingData(csvPath);
         INDArray features = converter.toTrainingTensor(rawData);
         INDArray labels = createLabelTensor(rawData);
 
@@ -98,7 +98,7 @@ public class LstmPredictorV2 {
     /**
      * DTO 리스트에서 정답(Label) 텐서 생성.
      */
-    private INDArray createLabelTensor(List<LstmAdvancedRequestV1> list) {
+    private INDArray createLabelTensor(List<LstmAdvancedRequestV2> list) {
         int batchSize = list.size();
         // [BatchSize, OutputSize, TimeStep] 구조로 마지막 시점에 정답 배치
         INDArray labels = Nd4j.zeros(batchSize, 1, 6);
