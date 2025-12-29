@@ -4,6 +4,7 @@ import aicard.perli.dl.lstm.dto.request.advanced.v1.LstmAdvancedRequestV1;
 import aicard.perli.dl.lstm.util.loader.v1.LstmDataLoaderV1;
 import aicard.perli.dl.lstm.util.converter.v1.LstmDataConverterV1;
 import lombok.Getter;
+import lombok.extern.slf4j.Slf4j;
 import org.deeplearning4j.nn.conf.MultiLayerConfiguration;
 import org.deeplearning4j.nn.conf.NeuralNetConfiguration;
 import org.deeplearning4j.nn.conf.layers.LSTM;
@@ -24,6 +25,7 @@ import java.util.List;
  * 통합 데이터셋을 로드하여 모델을 생성하고 학습한 뒤 파일로 저장함.
  */
 @Getter
+@Slf4j
 public class LstmPredictorV1 {
 
     private MultiLayerNetwork model;
@@ -45,16 +47,16 @@ public class LstmPredictorV1 {
         initModel(10, 1);
 
         // 학습 수행
-        System.out.println("LSTM 학습 시작 (총 " + rawData.size() + "건)");
+        log.info("LSTM 학습 시작 (총 " + rawData.size() + "건)");
         for (int i = 1; i <= 50; i++) {
             model.fit(features, labels);
-            if (i % 10 == 0) System.out.println("Epoch " + i + " 완료...");
+            if (i % 10 == 0) log.info("Epoch " + i + " 완료...");
         }
 
         // 모델 저장
         File saveFile = new File(modelSavePath);
         model.save(saveFile, true);
-        System.out.println("모델 저장 완료: " + saveFile.getAbsolutePath());
+        log.info("모델 저장 완료: " + saveFile.getAbsolutePath());
     }
 
     /**
