@@ -1,6 +1,6 @@
 package aicard.perli.dl.lstm.service.v2;
 
-import aicard.perli.dl.lstm.dto.request.advanced.v2.LstmAdvancedRequestV2;
+import aicard.perli.dl.lstm.dto.request.v2.LstmAdvancedRequestV2;
 import aicard.perli.dl.lstm.util.converter.v2.LstmDataConverterV2;
 import aicard.perli.dl.lstm.util.loader.v2.LstmDataLoaderV2;
 import lombok.Getter;
@@ -85,7 +85,7 @@ public class LstmPredictorV2 {
                         .build())
                 // 출력층 (Regression 전용)
                 .layer(2, new RnnOutputLayer.Builder(LossFunctions.LossFunction.MSE)
-                        .activation(Activation.IDENTITY)
+                        .activation(Activation.RELU)
                         .nIn(64)
                         .nOut(outputSize)
                         .build())

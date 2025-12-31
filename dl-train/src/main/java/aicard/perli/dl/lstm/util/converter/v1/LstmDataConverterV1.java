@@ -1,6 +1,6 @@
 package aicard.perli.dl.lstm.util.converter.v1;
 
-import aicard.perli.dl.lstm.dto.request.advanced.v1.LstmAdvancedRequestV1;
+import aicard.perli.dl.lstm.dto.request.v1.LstmAdvancedRequestV1;
 import org.nd4j.linalg.api.ndarray.INDArray;
 import org.nd4j.linalg.factory.Nd4j;
 import java.util.List;
