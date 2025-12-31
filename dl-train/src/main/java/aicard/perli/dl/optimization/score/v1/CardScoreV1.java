@@ -25,7 +25,7 @@ public class CardScoreV1 implements ConstraintProvider {
     }
 
     /**
-     * [Soft Score] 지출액 대비 카드별 혜택 비율을 계산하여 점수를 부여합니다.
+     * 지출액 대비 카드별 혜택 비율을 계산하여 점수를 부여합니다.
      * 혜택 금액이 클수록 높은 점수를 획득하여 혜택 중심의 할당을 유도합니다.
      */
     private Constraint maxBenefit(ConstraintFactory factory) {
@@ -36,7 +36,7 @@ public class CardScoreV1 implements ConstraintProvider {
     }
 
     /**
-     * [Soft Score] 카드별 배정 금액 총합이 목표 실적에 도달했는지 확인합니다.
+     * 카드별 배정 금액 총합이 목표 실적에 도달했는지 확인합니다.
      * 목표 실적 달성 시 보너스 점수(1000점)를 부여하여 효율적인 실적 채우기를 유도합니다.
      */
     private Constraint checkTarget(ConstraintFactory factory) {

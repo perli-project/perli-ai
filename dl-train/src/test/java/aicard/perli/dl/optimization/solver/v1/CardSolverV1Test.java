@@ -1,7 +1,7 @@
 package aicard.perli.dl.optimization.solver.v1;
 
 import aicard.perli.dl.optimization.domain.fix.v1.CreditCardV1;
-import aicard.perli.dl.optimization.domain.solution.v1.CardOptimizationSolutionV1;
+import aicard.perli.dl.optimization.domain.solution.v1.CardSolutionV1;
 import aicard.perli.dl.optimization.domain.unfix.v1.CardAssignmentV1;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -30,11 +30,11 @@ class CardSolverV1Test {
                 new CardAssignmentV1("SPEND-03", 100000.0, null)
         );
 
-        CardOptimizationSolutionV1 problem = new CardOptimizationSolutionV1(cardList, assignmentList, null);
+        CardSolutionV1 problem = new CardSolutionV1(cardList, assignmentList, null);
         CardSolverV1 solver = new CardSolverV1();
 
         // When: 최적화 실행
-        CardOptimizationSolutionV1 result = solver.solve(problem);
+        CardSolutionV1 result = solver.solve(problem);
 
         // Then: 결과 검증
         assertNotNull(result.getScore(), "결과 점수가 산출되어야 합니다.");
