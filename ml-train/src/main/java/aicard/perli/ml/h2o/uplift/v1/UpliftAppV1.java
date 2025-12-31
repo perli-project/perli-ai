@@ -5,23 +5,36 @@ import aicard.perli.ml.h2o.service.v1.H2oTrainServiceV1;
 import lombok.extern.slf4j.Slf4j;
 
 /**
- * <p>[V1] 카드 로열티 예측 모델의 전체 파이프라인을 실행하는 메인 클래스입니다.</p>
- * <p>V1 표준 뼈대 피처셋을 사용하여 모델 학습, 수동 MOJO 조립, 추론 테스트를 순차적으로 수행합니다.</p>
+ * V1 카드 로열티 예측 모델의 전체 파이프라인을 실행하는 메인 클래스입니다.
+ * <p>
+ * V1 표준 뼈대 피처셋을 사용하여 모델 학습, 수동 MOJO 조립, 추론 테스트를 순차적으로 수행합니다.
+ * 이 프로세스를 통해 데이터 전처리부터 실시간 업리프트 점수 산출까지의 전체 생명주기를 검증합니다.
+ * </p>
  */
 @Slf4j
 public class UpliftAppV1 {
 
+    /**
+     * V1 업리프트 시스템의 통합 실행 메커니즘을 관장하는 메인 메서드입니다.
+     * <p>
+     * 학습 로직(TrainService)을 통한 기초 모델 생성 <br>
+     * 추론 엔진(InferenceService) 로드 <br>
+     * S-Learner 기반의 가상 시뮬레이션을 통한 마케팅 타겟팅 판단 <br>
+     * 순으로 진행됩니다.
+     * </p>
+     * @param args 실행 인자
+     */
     public static void main(String[] args) {
 
         log.info("==========================================================");
         log.info("카드 로열티 업리프트 시스템 가동");
         log.info("==========================================================");
 
-        // 뼈대 데이터 및 V1 모델 ZIP 경로
+        // 뼈대 데이터 및 V1 모델 ZIP 경로 설정
         String dataPath = "C:/Coding/perli-ai/resources/processed/h2o/v1/train_uplift_v1.csv";
         String modelPath = "C:/Coding/perli-ai/resources/output/models/h2o/v1/uplift_gbm_model_v1.zip";
 
-        // 모델 학습 및 MOJO 조립 절차 수행 (Reflection 기반 버그 우회 포함)
+        // 모델 학습 및 MOJO 조립 절차 수행 (Reflection 기반 버그 우회 프로세스 포함)
         H2oTrainServiceV1 trainService = new H2oTrainServiceV1();
         trainService.train(dataPath);
 
@@ -29,8 +42,7 @@ public class UpliftAppV1 {
         log.info("실시간 추론 및 증분 분석(Uplift) 테스트 시작");
         H2oInferenceServiceV1 inferenceService = new H2oInferenceServiceV1(modelPath);
 
-        // 테스트용 가상 고객 데이터 (V1 표준 피처 8종 규격)
-        // (데이터 예시: 총액 3000, 50건, 할부 1.5, 최대액 1000, 평균액 60, 승인율 0.97)
+        // 테스트용 가상 고객 데이터 (V1 표준 피처 8종 규격 정의)
         double totalAmount = 3000.0;
         int txCount = 50;
         double avgInstallments = 1.5;
@@ -38,15 +50,15 @@ public class UpliftAppV1 {
         double avgAmount = 60.0;
         double authRatio = 0.97;
 
-        // 단순 로열티 점수 예측 (Base Score)
+        // 단순 로열티 점수 예측 (Base Score) - 현재 상태의 기대 가치 측정
         double baseScore = inferenceService.predict(totalAmount, txCount, avgInstallments, maxAmount, avgAmount, authRatio);
         log.info("테스트 고객 베이스라인 점수: {}", baseScore);
 
-        // 업리프트 분석 (S-Learner 알고리즘 가동)
+        // 업리프트 분석 (S-Learner 알고리즘 가동): 추천 처치 시의 가치 증분량 계산
         double upliftScore = inferenceService.predictUplift(totalAmount, txCount, avgInstallments, maxAmount, avgAmount, authRatio);
         log.info("최종 분석 결과: 순수 증분 효과(Uplift Score) = {}", String.format("%.6f", upliftScore));
 
-        // 결과 기반 마케팅 타겟팅 판단
+        // 업리프트 점수가 양수이면 마케팅 개입 시 긍정적인 행동 변화가 기대되는 그룹으로 분류
         if (upliftScore > 0) {
             log.info("추천 시 점수 상승 확정: 마케팅 타겟(Persuadables) 그룹");
         } else {
