@@ -1,5 +1,5 @@
 window.BENCHMARK_DATA = {
-  "lastUpdate": 1767013046889,
+  "lastUpdate": 1767172544528,
   "repoUrl": "https://github.com/perli-project/perli-ai",
   "entries": {
     "Benchmark": [
@@ -388,6 +388,36 @@ window.BENCHMARK_DATA = {
           {
             "name": "aicard.perli.ml.benchmark.UpliftBenchmark.benchmarkPredictUplift",
             "value": 6.368636209432507e-7,
+            "unit": "ms/op",
+            "extra": "iterations: 1\nforks: 1\nthreads: 1"
+          }
+        ]
+      },
+      {
+        "commit": {
+          "author": {
+            "email": "81628455+WhiteBin-bin@users.noreply.github.com",
+            "name": "Baek HyeonBin",
+            "username": "WhiteBin-bin"
+          },
+          "committer": {
+            "email": "noreply@github.com",
+            "name": "GitHub",
+            "username": "web-flow"
+          },
+          "distinct": true,
+          "id": "2b2a8fa5fa5fc396a57a1e28263a2df624bab140",
+          "message": "✨ Feat: LSTM 모델 아키텍처 개선 및 추론 파이프라인 완성 (#33)",
+          "timestamp": "2025-12-31T18:13:34+09:00",
+          "tree_id": "2ab704e650daea433d3547b9e619f9a38687e6c6",
+          "url": "https://github.com/perli-project/perli-ai/commit/2b2a8fa5fa5fc396a57a1e28263a2df624bab140"
+        },
+        "date": 1767172544179,
+        "tool": "jmh",
+        "benches": [
+          {
+            "name": "aicard.perli.ml.benchmark.UpliftBenchmark.benchmarkPredictUplift",
+            "value": 6.323871297193864e-7,
             "unit": "ms/op",
             "extra": "iterations: 1\nforks: 1\nthreads: 1"
           }
