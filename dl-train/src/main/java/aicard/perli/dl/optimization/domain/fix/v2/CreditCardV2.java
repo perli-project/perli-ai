@@ -4,8 +4,11 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.util.HashSet;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Set;
+import java.util.TreeMap;
 
 /**
  * 카테고리별 차등 혜택과 통합 할인 한도를 포함하는 고도화된 카드 정보 클래스입니다.
@@ -42,4 +45,46 @@ public class CreditCardV2 {
      * 카테고리별 혜택의 합이 이 한도를 초과할 경우, 엔진은 한도까지만 점수를 부여합니다.
      */
     private double maxBenefitLimit;
+
+    /** 카드 혜택이 적용되기 위한 최소 누적 실적(당월 current+배정합 기준) */
+    private double minimumSpendRequired = 0.0;
+
+    /** 개별 결제 건이 해당 금액 이상일 때만 혜택 적용 */
+    private double minimumTransactionAmountForBenefit = 0.0;
+
+    /** 카드 정책상 혜택 제외되는 업종 목록 */
+    private Set<String> restrictedCategories = new HashSet<>();
+
+    /** 실적 구간별 혜택 배수(예: 0->1.0, 300000->1.05, 600000->1.12) */
+    private TreeMap<Double, Double> performanceBandMultipliers = new TreeMap<>();
+
+    /**
+     * 기존 코드 호환을 위한 V2 기본 생성자.
+     */
+    public CreditCardV2(
+            String cardId,
+            String cardName,
+            double performanceTarget,
+            Map<String, Double> ccategoryBenefitRates,
+            double currentPerformance,
+            double maxBenefitLimit
+    ) {
+        this.cardId = cardId;
+        this.cardName = cardName;
+        this.performanceTarget = performanceTarget;
+        this.ccategoryBenefitRates = ccategoryBenefitRates;
+        this.currentPerformance = currentPerformance;
+        this.maxBenefitLimit = maxBenefitLimit;
+    }
+
+    /**
+     * 누적 실적 구간에 따른 혜택 배수를 조회합니다.
+     */
+    public double resolvePerformanceBandMultiplier(double projectedPerformance) {
+        if (performanceBandMultipliers == null || performanceBandMultipliers.isEmpty()) {
+            return 1.0;
+        }
+        Map.Entry<Double, Double> floor = performanceBandMultipliers.floorEntry(projectedPerformance);
+        return floor == null ? 1.0 : floor.getValue();
+    }
 }

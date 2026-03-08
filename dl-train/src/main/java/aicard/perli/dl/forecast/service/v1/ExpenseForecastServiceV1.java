@@ -14,10 +14,20 @@ public class ExpenseForecastServiceV1 {
      * @return 최종 월말 예상 지출액
      */
     public double forecastMonthEndExpense(double[] monthlySpentHistory, Double lstmPrediction) {
-        double arima = arimaForecaster.forecastNext(monthlySpentHistory, 1);
-        if (lstmPrediction == null || lstmPrediction <= 0) {
-            return arima;
-        }
-        return 0.6 * arima + 0.4 * lstmPrediction;
+        double arima = forecastByArima(monthlySpentHistory);
+        if (lstmPrediction == null || lstmPrediction <= 0) return arima;
+        return forecastByEnsemble(arima, lstmPrediction);
+    }
+
+    public double forecastByArima(double[] monthlySpentHistory) {
+        return arimaForecaster.forecastNext(monthlySpentHistory, 1);
+    }
+
+    public double forecastByEnsemble(double arimaPrediction, double lstmPrediction) {
+        return 0.6 * arimaPrediction + 0.4 * lstmPrediction;
+    }
+
+    public double absoluteError(double prediction, double actual) {
+        return Math.abs(prediction - actual);
     }
 }

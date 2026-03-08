@@ -8,9 +8,11 @@ import aicard.perli.dl.optimization.solver.v2.CardSolverV2;
 import lombok.extern.slf4j.Slf4j;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.TreeMap;
 
 /**
  * ARIMA/LSTM 예측값을 기반으로 월말 최적 결제 시나리오를 생성하는 실행 앱.
@@ -50,19 +52,34 @@ public class OptimizationPlannerAppV2 {
         cardA.put("FOOD", 0.10);
         cardA.put("MART", 0.08);
         cardA.put("ONLINE", 0.05);
-        cards.add(new CreditCardV2("cardA", "NH 라이프", 300000, cardA, 180000, 15000));
+        CreditCardV2 life = new CreditCardV2("cardA", "NH 라이프", 300000, cardA, 180000, 15000);
+        life.setMinimumSpendRequired(200000);
+        life.setMinimumTransactionAmountForBenefit(10000);
+        life.setRestrictedCategories(new HashSet<>(List.of("FUEL")));
+        life.setPerformanceBandMultipliers(new TreeMap<>(Map.of(0.0, 1.0, 300000.0, 1.05, 600000.0, 1.12)));
+        cards.add(life);
 
         Map<String, Double> cardB = new HashMap<>();
         cardB.put("ONLINE", 0.12);
         cardB.put("SUBSCRIPTION", 0.15);
         cardB.put("TRANSPORT", 0.05);
-        cards.add(new CreditCardV2("cardB", "NH 디지털", 400000, cardB, 240000, 20000));
+        CreditCardV2 digital = new CreditCardV2("cardB", "NH 디지털", 400000, cardB, 240000, 20000);
+        digital.setMinimumSpendRequired(250000);
+        digital.setMinimumTransactionAmountForBenefit(7000);
+        digital.setRestrictedCategories(new HashSet<>(List.of("MART")));
+        digital.setPerformanceBandMultipliers(new TreeMap<>(Map.of(0.0, 1.0, 400000.0, 1.08, 700000.0, 1.15)));
+        cards.add(digital);
 
         Map<String, Double> cardC = new HashMap<>();
         cardC.put("FUEL", 0.10);
         cardC.put("TRANSPORT", 0.08);
         cardC.put("FOOD", 0.03);
-        cards.add(new CreditCardV2("cardC", "NH 드라이브", 250000, cardC, 110000, 12000));
+        CreditCardV2 drive = new CreditCardV2("cardC", "NH 드라이브", 250000, cardC, 110000, 12000);
+        drive.setMinimumSpendRequired(150000);
+        drive.setMinimumTransactionAmountForBenefit(5000);
+        drive.setRestrictedCategories(new HashSet<>(List.of("SUBSCRIPTION")));
+        drive.setPerformanceBandMultipliers(new TreeMap<>(Map.of(0.0, 1.0, 250000.0, 1.06, 500000.0, 1.1)));
+        cards.add(drive);
 
         return cards;
     }

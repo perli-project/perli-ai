@@ -22,10 +22,41 @@ public class CardScoreV2 implements ConstraintProvider {
     @Override
     public Constraint[] defineConstraints(ConstraintFactory factory) {
         return new Constraint[] {
+                penalizeRestrictedCategoryUsage(factory),
+                penalizeMinimumSpendShortfall(factory),
                 penalizePerformanceShortfall(factory),
                 maximizeBenefitWithinLimit(factory),
                 reachPerformanceTarget(factory)
         };
+    }
+
+    /**
+     * 카드 정책상 혜택 제외 업종에 배정된 경우 강한 하드 패널티를 부여합니다.
+     */
+    private Constraint penalizeRestrictedCategoryUsage(ConstraintFactory factory) {
+        return factory.forEach(CardAssignmentV2.class)
+                .filter(a -> a.getCreditCard() != null)
+                .filter(a -> a.getCreditCard().getRestrictedCategories() != null
+                        && a.getCreditCard().getRestrictedCategories().contains(a.getCategory()))
+                .penalize(HardSoftScore.ONE_HARD, a -> 100)
+                .asConstraint("PenalizeRestrictedCategoryUsage");
+    }
+
+    /**
+     * 카드별 최소 실적 요건(minimumSpendRequired) 미달 시 하드 패널티를 부여합니다.
+     */
+    private Constraint penalizeMinimumSpendShortfall(ConstraintFactory factory) {
+        return factory.forEach(CardAssignmentV2.class)
+                .filter(a -> a.getCreditCard() != null)
+                .groupBy(CardAssignmentV2::getCreditCard,
+                        ConstraintCollectors.sum(a -> (int) a.getSpendingAmount()))
+                .filter((card, sumAmount) ->
+                        sumAmount > 0 && (card.getCurrentPerformance() + sumAmount) < card.getMinimumSpendRequired())
+                .penalize(HardSoftScore.ONE_HARD, (card, sumAmount) -> {
+                    double shortfall = card.getMinimumSpendRequired() - (card.getCurrentPerformance() + sumAmount);
+                    return (int) Math.ceil(shortfall / 1000.0);
+                })
+                .asConstraint("PenalizeMinimumSpendShortfall");
     }
 
     /**
@@ -34,6 +65,7 @@ public class CardScoreV2 implements ConstraintProvider {
      */
     private Constraint penalizePerformanceShortfall(ConstraintFactory factory) {
         return factory.forEach(CardAssignmentV2.class)
+                .filter(a -> a.getCreditCard() != null)
                 .groupBy(CardAssignmentV2::getCreditCard,
                         ConstraintCollectors.sum(a -> (int) a.getSpendingAmount()))
                 .penalize(HardSoftScore.ONE_HARD, (card, sumAmount) -> {
@@ -52,16 +84,29 @@ public class CardScoreV2 implements ConstraintProvider {
      */
     private Constraint maximizeBenefitWithinLimit(ConstraintFactory factory) {
         return factory.forEach(CardAssignmentV2.class)
+                .filter(a -> a.getCreditCard() != null)
                 .groupBy(CardAssignmentV2::getCreditCard,
+                        ConstraintCollectors.sum(a -> (int) a.getSpendingAmount()),
                         ConstraintCollectors.sum(a -> {
-                            // 해당 지출 업종(Category)에 맞는 카드의 할인율 적용
+                            if (a.getCreditCard().getRestrictedCategories() != null
+                                    && a.getCreditCard().getRestrictedCategories().contains(a.getCategory())) {
+                                return 0;
+                            }
+                            if (a.getSpendingAmount() < a.getCreditCard().getMinimumTransactionAmountForBenefit()) {
+                                return 0;
+                            }
+
                             double rate = a.getCreditCard().getCcategoryBenefitRates()
                                     .getOrDefault(a.getCategory(), 0.0);
                             return (int) (a.getSpendingAmount() * rate);
                         }))
-                .reward(HardSoftScore.ONE_SOFT, (card, totalBenefit) -> {
-                    // 수리적 임계치(Min-Max) 적용: 계산된 혜택이 한도를 넘더라도 한도까지만 보상
-                    return (int) Math.min(totalBenefit, card.getMaxBenefitLimit());
+                .reward(HardSoftScore.ONE_SOFT, (card, totalSpend, totalBenefit) -> {
+                    if ((card.getCurrentPerformance() + totalSpend) < card.getMinimumSpendRequired()) {
+                        return 0;
+                    }
+                    double multiplier = card.resolvePerformanceBandMultiplier(card.getCurrentPerformance() + totalSpend);
+                    double adjustedBenefit = totalBenefit * multiplier;
+                    return (int) Math.min(adjustedBenefit, card.getMaxBenefitLimit());
                 })
                 .asConstraint("MaximizeBenefitWithinLimit");
     }
@@ -75,6 +120,7 @@ public class CardScoreV2 implements ConstraintProvider {
      */
     private Constraint reachPerformanceTarget(ConstraintFactory factory) {
         return factory.forEach(CardAssignmentV2.class)
+                .filter(a -> a.getCreditCard() != null)
                 .groupBy(CardAssignmentV2::getCreditCard,
                         ConstraintCollectors.sum(a -> (int) a.getSpendingAmount()))
                 .filter((card, sumAmount) ->
