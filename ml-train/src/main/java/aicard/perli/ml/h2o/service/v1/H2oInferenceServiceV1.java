@@ -59,6 +59,11 @@ public class H2oInferenceServiceV1 {
      */
     public double predictUplift(double totalAmount, int txCount, double avgInstallments,
                                 double maxAmount, double avgAmount, double authRatio) {
+        return predictUplift(totalAmount, txCount, avgInstallments, maxAmount, avgAmount, authRatio, true);
+    }
+
+    public double predictUplift(double totalAmount, int txCount, double avgInstallments,
+                                double maxAmount, double avgAmount, double authRatio, boolean emitLog) {
         try {
             if (modelWrapper == null) return 0.0;
 
@@ -75,7 +80,9 @@ public class H2oInferenceServiceV1 {
             // 두 시나리오 간의 차이(Incremental Benefit) 산출
             double uplift = scoreWithAction - scoreWithoutAction;
 
-            log.info("ScoreDiff: {}", String.format("%.4f", uplift));
+            if (emitLog) {
+                log.info("ScoreDiff: {}", String.format("%.4f", uplift));
+            }
             return uplift;
 
         } catch (Exception e) {
