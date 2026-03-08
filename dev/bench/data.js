@@ -1,5 +1,5 @@
 window.BENCHMARK_DATA = {
-  "lastUpdate": 1772957261988,
+  "lastUpdate": 1772958515084,
   "repoUrl": "https://github.com/perli-project/perli-ai",
   "entries": {
     "Benchmark": [
@@ -538,6 +538,36 @@ window.BENCHMARK_DATA = {
           {
             "name": "aicard.perli.ml.benchmark.UpliftBenchmark.benchmarkPredictUplift",
             "value": 6.347308517342022e-7,
+            "unit": "ms/op",
+            "extra": "iterations: 1\nforks: 1\nthreads: 1"
+          }
+        ]
+      },
+      {
+        "commit": {
+          "author": {
+            "email": "81628455+WhiteBin-bin@users.noreply.github.com",
+            "name": "Baek HyeonBin",
+            "username": "WhiteBin-bin"
+          },
+          "committer": {
+            "email": "noreply@github.com",
+            "name": "GitHub",
+            "username": "web-flow"
+          },
+          "distinct": true,
+          "id": "59049153b7e76bf02eed14ae5c078b4790e382a4",
+          "message": "✨ Feat: 최적화 플래너 V2 고도화 (#42)",
+          "timestamp": "2026-03-08T17:26:17+09:00",
+          "tree_id": "225da248dae38538d9fea26d9aad856a1553463d",
+          "url": "https://github.com/perli-project/perli-ai/commit/59049153b7e76bf02eed14ae5c078b4790e382a4"
+        },
+        "date": 1772958514367,
+        "tool": "jmh",
+        "benches": [
+          {
+            "name": "aicard.perli.ml.benchmark.UpliftBenchmark.benchmarkPredictUplift",
+            "value": 6.34241185973989e-7,
             "unit": "ms/op",
             "extra": "iterations: 1\nforks: 1\nthreads: 1"
           }
