@@ -1,5 +1,5 @@
 window.BENCHMARK_DATA = {
-  "lastUpdate": 1767172544528,
+  "lastUpdate": 1772949948578,
   "repoUrl": "https://github.com/perli-project/perli-ai",
   "entries": {
     "Benchmark": [
@@ -418,6 +418,36 @@ window.BENCHMARK_DATA = {
           {
             "name": "aicard.perli.ml.benchmark.UpliftBenchmark.benchmarkPredictUplift",
             "value": 6.323871297193864e-7,
+            "unit": "ms/op",
+            "extra": "iterations: 1\nforks: 1\nthreads: 1"
+          }
+        ]
+      },
+      {
+        "commit": {
+          "author": {
+            "email": "81628455+WhiteBin-bin@users.noreply.github.com",
+            "name": "Baek HyeonBin",
+            "username": "WhiteBin-bin"
+          },
+          "committer": {
+            "email": "noreply@github.com",
+            "name": "GitHub",
+            "username": "web-flow"
+          },
+          "distinct": true,
+          "id": "67e5d2f9ca1f5ff75378aa61caabcd9dfb100f26",
+          "message": "✨ Feat: 카드 혜택 수리적 최적화 모델 고도화 (#34)",
+          "timestamp": "2026-03-08T15:02:35+09:00",
+          "tree_id": "e3605a47e7695717e4cb48c3e8c6cf3e03cbf106",
+          "url": "https://github.com/perli-project/perli-ai/commit/67e5d2f9ca1f5ff75378aa61caabcd9dfb100f26"
+        },
+        "date": 1772949947956,
+        "tool": "jmh",
+        "benches": [
+          {
+            "name": "aicard.perli.ml.benchmark.UpliftBenchmark.benchmarkPredictUplift",
+            "value": 6.326958109094256e-7,
             "unit": "ms/op",
             "extra": "iterations: 1\nforks: 1\nthreads: 1"
           }
