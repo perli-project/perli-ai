@@ -1,5 +1,5 @@
 window.BENCHMARK_DATA = {
-  "lastUpdate": 1772955968718,
+  "lastUpdate": 1772957261988,
   "repoUrl": "https://github.com/perli-project/perli-ai",
   "entries": {
     "Benchmark": [
@@ -508,6 +508,36 @@ window.BENCHMARK_DATA = {
           {
             "name": "aicard.perli.ml.benchmark.UpliftBenchmark.benchmarkPredictUplift",
             "value": 6.566490446848445e-7,
+            "unit": "ms/op",
+            "extra": "iterations: 1\nforks: 1\nthreads: 1"
+          }
+        ]
+      },
+      {
+        "commit": {
+          "author": {
+            "email": "81628455+WhiteBin-bin@users.noreply.github.com",
+            "name": "Baek HyeonBin",
+            "username": "WhiteBin-bin"
+          },
+          "committer": {
+            "email": "noreply@github.com",
+            "name": "GitHub",
+            "username": "web-flow"
+          },
+          "distinct": true,
+          "id": "ea354805b906f6e355cdc2ec6069a32d82765cd0",
+          "message": "✨ Feat: 업리프트 모델링 V1 구현 (#40)",
+          "timestamp": "2026-03-08T17:05:30+09:00",
+          "tree_id": "ea5a1bfdca3d38a8035eee9d4a7af1846510319c",
+          "url": "https://github.com/perli-project/perli-ai/commit/ea354805b906f6e355cdc2ec6069a32d82765cd0"
+        },
+        "date": 1772957261550,
+        "tool": "jmh",
+        "benches": [
+          {
+            "name": "aicard.perli.ml.benchmark.UpliftBenchmark.benchmarkPredictUplift",
+            "value": 6.347308517342022e-7,
             "unit": "ms/op",
             "extra": "iterations: 1\nforks: 1\nthreads: 1"
           }
