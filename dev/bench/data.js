@@ -1,5 +1,5 @@
 window.BENCHMARK_DATA = {
-  "lastUpdate": 1772950183336,
+  "lastUpdate": 1772955968718,
   "repoUrl": "https://github.com/perli-project/perli-ai",
   "entries": {
     "Benchmark": [
@@ -478,6 +478,36 @@ window.BENCHMARK_DATA = {
           {
             "name": "aicard.perli.ml.benchmark.UpliftBenchmark.benchmarkPredictUplift",
             "value": 6.383945759717306e-7,
+            "unit": "ms/op",
+            "extra": "iterations: 1\nforks: 1\nthreads: 1"
+          }
+        ]
+      },
+      {
+        "commit": {
+          "author": {
+            "email": "81628455+WhiteBin-bin@users.noreply.github.com",
+            "name": "Baek HyeonBin",
+            "username": "WhiteBin-bin"
+          },
+          "committer": {
+            "email": "noreply@github.com",
+            "name": "GitHub",
+            "username": "web-flow"
+          },
+          "distinct": true,
+          "id": "039b400691ee4d55ed692ae9346223042e95cb49",
+          "message": "✨ Feat: 업리프트 모델링 고도화(S/T-Learner 비교 평가) (#38)",
+          "timestamp": "2026-03-08T16:43:54+09:00",
+          "tree_id": "1e05ce49c233602b9ee8b2bb4ae084b1a08afaed",
+          "url": "https://github.com/perli-project/perli-ai/commit/039b400691ee4d55ed692ae9346223042e95cb49"
+        },
+        "date": 1772955968408,
+        "tool": "jmh",
+        "benches": [
+          {
+            "name": "aicard.perli.ml.benchmark.UpliftBenchmark.benchmarkPredictUplift",
+            "value": 6.566490446848445e-7,
             "unit": "ms/op",
             "extra": "iterations: 1\nforks: 1\nthreads: 1"
           }
