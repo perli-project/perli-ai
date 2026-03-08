@@ -23,7 +23,6 @@ public class ArimaForecasterV1 {
             return simpleDriftForecast(series, steps);
         }
 
-        // AR(1): d_t = c + phi * d_{t-1}
         double meanPrev = mean(slice(diff, 0, diff.length - 1));
         double meanCurr = mean(slice(diff, 1, diff.length));
 
@@ -38,7 +37,6 @@ public class ArimaForecasterV1 {
         double phi = den == 0.0 ? 0.0 : clamp(num / den, -0.99, 0.99);
         double c = meanCurr - phi * meanPrev;
 
-        // MA(1) 근사: AR 잔차의 lag-1 자기상관을 theta로 사용
         double[] residual = new double[diff.length - 1];
         for (int i = 1; i < diff.length; i++) {
             residual[i - 1] = diff[i] - (c + phi * diff[i - 1]);
@@ -52,7 +50,7 @@ public class ArimaForecasterV1 {
         for (int h = 0; h < steps; h++) {
             double nextDiff = c + phi * lastDiff + theta * lastResidual;
             lastLevel += nextDiff;
-            lastResidual = 0.0; // 미래 오차 기대값 0
+            lastResidual = 0.0;
             lastDiff = nextDiff;
         }
         return Math.max(lastLevel, 0.0);
