@@ -22,9 +22,9 @@ public class CardScoreV2 implements ConstraintProvider {
     @Override
     public Constraint[] defineConstraints(ConstraintFactory factory) {
         return new Constraint[] {
-                penalizePerformanceShortfall(factory), // 실적 미달 하드 패널티
-                maximizeBenefitWithinLimit(factory), // 한도 내 혜택 극대화
-                reachPerformanceTarget(factory)      // 실적 목표 달성 유도
+                penalizePerformanceShortfall(factory),
+                maximizeBenefitWithinLimit(factory),
+                reachPerformanceTarget(factory)
         };
     }
 
@@ -79,7 +79,7 @@ public class CardScoreV2 implements ConstraintProvider {
                         ConstraintCollectors.sum(a -> (int) a.getSpendingAmount()))
                 .filter((card, sumAmount) ->
                         (card.getCurrentPerformance() + sumAmount) >= card.getPerformanceTarget())
-                .reward(HardSoftScore.ofSoft(5000)) // 실적 달성 시 보너스 (가중치 높음)
+                .reward(HardSoftScore.ofSoft(5000))
                 .asConstraint("ReachPerformanceTarget");
     }
 }
