@@ -1,5 +1,5 @@
 window.BENCHMARK_DATA = {
-  "lastUpdate": 1772949948578,
+  "lastUpdate": 1772950183336,
   "repoUrl": "https://github.com/perli-project/perli-ai",
   "entries": {
     "Benchmark": [
@@ -448,6 +448,36 @@ window.BENCHMARK_DATA = {
           {
             "name": "aicard.perli.ml.benchmark.UpliftBenchmark.benchmarkPredictUplift",
             "value": 6.326958109094256e-7,
+            "unit": "ms/op",
+            "extra": "iterations: 1\nforks: 1\nthreads: 1"
+          }
+        ]
+      },
+      {
+        "commit": {
+          "author": {
+            "email": "81628455+WhiteBin-bin@users.noreply.github.com",
+            "name": "Baek HyeonBin",
+            "username": "WhiteBin-bin"
+          },
+          "committer": {
+            "email": "noreply@github.com",
+            "name": "GitHub",
+            "username": "web-flow"
+          },
+          "distinct": true,
+          "id": "3b3498278d3d892369687976f590661e5c8bdf69",
+          "message": "✨ Feat: 소비 패턴 정밀 분석(K-Means) 고도화 (#36)",
+          "timestamp": "2026-03-08T15:07:29+09:00",
+          "tree_id": "41c05f982cbba86cfd436c925d633f9049fbaa24",
+          "url": "https://github.com/perli-project/perli-ai/commit/3b3498278d3d892369687976f590661e5c8bdf69"
+        },
+        "date": 1772950182955,
+        "tool": "jmh",
+        "benches": [
+          {
+            "name": "aicard.perli.ml.benchmark.UpliftBenchmark.benchmarkPredictUplift",
+            "value": 6.383945759717306e-7,
             "unit": "ms/op",
             "extra": "iterations: 1\nforks: 1\nthreads: 1"
           }
